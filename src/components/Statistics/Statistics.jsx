@@ -33,7 +33,7 @@ class Statistics extends Component {
         style={{ backgroundColor: getRandomHexColor() }}
       >
         <Label>{label}</Label>
-        <Percentage>{percentage}</Percentage>
+        <Percentage>{percentage}&#37;</Percentage>
       </StatisticItem>
     ));
   }
