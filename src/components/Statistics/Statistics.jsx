@@ -1,3 +1,4 @@
+import { Component } from 'react';
 import {
   StatList,
   StatisticsSection,
@@ -8,38 +9,45 @@ import {
 } from './Statistics.styled';
 import { getRandomHexColor } from './getRandomHexColor';
 
-const Statistics = ({ title, data }) => {
-  return (
-    <StatisticsSection>
-      {title && <Title>{title}</Title>}
-      <StatList>{statisticsMarkup(data)}</StatList>
-    </StatisticsSection>
-  );
-};
+class Statistics extends Component {
+  uniqueLabels(stats) {
+    return Object.entries(
+      stats.reduce((uniqueLabels, stat) => {
+        const isLabelDuplicate = uniqueLabels.hasOwnProperty(stat.label);
 
-const statisticsMarkup = data => {
-  return uniqueLabels(data).map(([label, percentage]) => (
-    <StatisticItem key={label} style={{ backgroundColor: getRandomHexColor() }}>
-      <Label>{label}</Label>
-      <Percentage>{percentage}</Percentage>
-    </StatisticItem>
-  ));
-};
+        if (!isLabelDuplicate) {
+          uniqueLabels[stat.label] = stat.percentage;
+        } else {
+          uniqueLabels[stat.label] += stat.percentage;
+        }
 
-const uniqueLabels = stats => {
-  return Object.entries(
-    stats.reduce((uniqueLabels, stat) => {
-      const isLabelDuplicate = uniqueLabels.hasOwnProperty(stat.label);
+        return uniqueLabels;
+      }, {})
+    );
+  }
 
-      if (!isLabelDuplicate) {
-        uniqueLabels[stat.label] = stat.percentage; // adds item to the object {label: value}
-      } else {
-        uniqueLabels[stat.label] += stat.percentage; //if such item is already in the list -> it's value added
-      }
+  statisticsMarkup(data) {
+    return this.uniqueLabels(data).map(([label, percentage]) => (
+      <StatisticItem
+        key={label}
+        style={{ backgroundColor: getRandomHexColor() }}
+      >
+        <Label>{label}</Label>
+        <Percentage>{percentage}</Percentage>
+      </StatisticItem>
+    ));
+  }
 
-      return uniqueLabels; // returns an object {uniqueLabels: values}
-    }, {})
-  );
-};
+  render() {
+    const { title, data } = this.props;
+
+    return (
+      <StatisticsSection>
+        {title && <Title>{title}</Title>}
+        <StatList>{this.statisticsMarkup(data)}</StatList>
+      </StatisticsSection>
+    );
+  }
+}
 
 export { Statistics };
