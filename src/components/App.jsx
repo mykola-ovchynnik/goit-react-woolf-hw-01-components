@@ -1,14 +1,24 @@
-import { Profile } from './Profile/Profile';
-import { Statistics } from './Statistics/Statistics';
+// import { Section } from './Section/Section.styled';
+import Profile from './Profile/Profile';
 
-import user from '../user.json';
-import data from '../data.json';
+// import { Statistics } from './Statistics/Statistics';
+
+import user from '../data/user.json';
+// import data from '../data/data.json';
 
 export const App = () => {
   return (
-    <>
-      <Profile user={user}></Profile>
-      <Statistics></Statistics>
-    </>
+    <section>
+      <Profile
+        username={user.username}
+        tag={user.tag}
+        location={user.location}
+        avatar={user.avatar}
+        stats={user.stats}
+      ></Profile>
+
+      {/* <Statistics title="Upload stats" data={data}></Statistics>
+      <Statistics data={data}></Statistics> */}
+    </section>
   );
 };

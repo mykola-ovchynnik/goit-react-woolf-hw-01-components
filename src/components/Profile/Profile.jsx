@@ -1,36 +1,41 @@
-import styles from './Profile.module.css';
+import {
+  Avatar,
+  Description,
+  Label,
+  ListItem,
+  Location,
+  Name,
+  ProfileWrapper,
+  Quantity,
+  Stats,
+  Tag,
+} from './Profile.styled';
 
-const Profile = ({ user }) => {
+const Profile = ({ username, tag, location, avatar, stats }) => {
   return (
-    <div className={styles.profile}>
-      <div className={styles.description}>
-        <img src={user.avatar} alt="User avatar" className={styles.avatar} />
-        <p className={styles.name}>{user.username}</p>
-        <p className={styles.tag}>&#64;{user.tag}</p>
-        <p className={styles.location}>{user.location}</p>
-      </div>
+    <ProfileWrapper>
+      <Description>
+        <Avatar src={avatar} alt="User avatar"></Avatar>
+        <Name>{username}</Name>
+        <Tag>&#64;{tag}</Tag>
+        <Location>{location}</Location>
+      </Description>
 
-      <ul className={styles.stats}>
-        <li className={styles.statsItem}>
-          <span className={styles.label}>
-            {capitalize(Object.keys(user.stats)[0])}
-          </span>
-          <span className={styles.quantity}>{user.stats.followers}</span>
-        </li>
-        <li className={styles.statsItem}>
-          <span className={styles.label}>
-            {capitalize(Object.keys(user.stats)[1])}
-          </span>
-          <span className={styles.quantity}>{user.stats.views}</span>
-        </li>
-        <li className={styles.statsItem}>
-          <span className={styles.label}>
-            {capitalize(Object.keys(user.stats)[2])}
-          </span>
-          <span className={styles.quantity}>{user.stats.likes}</span>
-        </li>
-      </ul>
-    </div>
+      <Stats>
+        <ListItem>
+          <Label>{capitalize(Object.keys(stats)[0])}</Label>
+          <Quantity>{stats.followers}</Quantity>
+        </ListItem>
+        <ListItem>
+          <Label>{capitalize(Object.keys(stats)[1])}</Label>
+          <Quantity>{stats.views}</Quantity>
+        </ListItem>
+        <ListItem>
+          <Label>{capitalize(Object.keys(stats)[2])}</Label>
+          <Quantity>{stats.likes}</Quantity>
+        </ListItem>
+      </Stats>
+    </ProfileWrapper>
   );
 };
 
@@ -38,4 +43,4 @@ const capitalize = string => {
   return string[0].toUpperCase() + string.slice(1);
 };
 
-export { Profile };
+export default Profile;
