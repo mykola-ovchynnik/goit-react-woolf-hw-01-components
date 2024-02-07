@@ -50,4 +50,4 @@ class Statistics extends Component {
   }
 }
 
-export { Statistics };
+export default Statistics;
