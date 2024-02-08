@@ -17,10 +17,10 @@ export const App = () => {
         location={user.location}
         avatar={user.avatar}
         stats={user.stats}
-      ></Profile>
-      <Statistics title="Upload stats" data={data}></Statistics>
-      <FriendList friends={friends}></FriendList>
-      <TransactionHistory transactions={transactions}></TransactionHistory>
+      />
+      <Statistics title="Upload stats" data={data} />
+      <FriendList friends={friends} />
+      <TransactionHistory transactions={transactions} />
     </section>
   );
 };

@@ -23,24 +23,20 @@ const Profile = ({ username, tag, location, avatar, stats }) => {
 
       <Stats>
         <ListItem>
-          <Label>{capitalize(Object.keys(stats)[0])}</Label>
+          <Label>Followers</Label>
           <Quantity>{stats.followers}</Quantity>
         </ListItem>
         <ListItem>
-          <Label>{capitalize(Object.keys(stats)[1])}</Label>
+          <Label>Views</Label>
           <Quantity>{stats.views}</Quantity>
         </ListItem>
         <ListItem>
-          <Label>{capitalize(Object.keys(stats)[2])}</Label>
+          <Label>Likes</Label>
           <Quantity>{stats.likes}</Quantity>
         </ListItem>
       </Stats>
     </ProfileWrapper>
   );
-};
-
-const capitalize = string => {
-  return string[0].toUpperCase() + string.slice(1);
 };
 
 export default Profile;
